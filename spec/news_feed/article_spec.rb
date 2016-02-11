@@ -25,7 +25,12 @@ describe NewsFeed::Article do
 
       it "should have the correct description" do
         expect(subject.description).to eq(
-          " There are a lot of blog posts out there explaining how to get started with Docker. But in our recent experiments we’ve run into a couple of issues, so we’ve compiled a list of our encountered problems and their solutions on <a href=\"http://cookieshq.co.uk/posts/common-problems-when-starting-with-docker-and-rails/\">our latest post</a>. I hope it’s useful. "
+          " There are a lot of blog posts out there explaining how to get "+
+          "started with Docker. But in our recent experiments we’ve run into "+
+          "a couple of issues, so we’ve compiled a list of our encountered "+
+          "problems and their solutions on "+
+          "<a href=\"http://cookieshq.co.uk/posts/common-problems-when-starting-with-docker-and-rails/\">our latest post</a>. "+
+          "I hope it’s useful. "
         )
       end
     end
