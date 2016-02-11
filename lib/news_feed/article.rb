@@ -1,7 +1,7 @@
 module NewsFeed
-  class Article
-    def initialize(node)
-      @node = node
+  class Article < Struct.new(:node)
+    def title
+      node.css("title").text
     end
   end
 end
