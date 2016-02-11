@@ -1,6 +1,6 @@
 require 'bundler/setup'
 Bundler.require(:default)
 
-require 'feed_fetcher'
+require 'news_feed'
 
 # put global rspec stuff here
