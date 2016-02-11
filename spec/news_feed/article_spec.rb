@@ -1,12 +1,12 @@
 describe NewsFeed::Article do
+  let(:articles) { doc.articles }
+
   context "from rubyflow" do
     let(:url) { "http://www.rubyflow.com/rss" }
 
     let(:doc) do
       VCR.use_cassette("rubyflow_articles") { NewsFeed.fetch(url) }
     end
-
-    let(:articles) { doc.articles }
 
     context "first" do
       subject { articles.first }
@@ -39,5 +39,29 @@ describe NewsFeed::Article do
       # binding.pry
     end
 
+  end
+
+  context "from nytimes" do
+    let(:url) { "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" }
+
+    let(:doc) do
+      VCR.use_cassette("nytimes_articles") { NewsFeed.fetch(url) }
+    end
+
+    context "first" do
+      subject { articles.first }
+
+      it "should have the correct title" do
+        expect(subject.title).to eq(
+          "New York Today: New York Today: Where to Eat Alone"
+        )
+      end
+
+      it "should have the correct url" do
+        expect(subject.url).to eq(
+          "http://www.nytimes.com/2016/02/11/nyregion/new-york-today-where-to-eat-alone.html?partner=rss&emc=rss"
+        )
+      end
+    end
   end
 end

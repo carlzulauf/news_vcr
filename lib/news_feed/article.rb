@@ -5,7 +5,16 @@ module NewsFeed
     end
 
     def url
-      node.css("link").text
+      node.children.each do |child|
+        if child.name == "link"
+          if child.namespace&.prefix == "atom"
+            return child["href"]
+          else
+            return child.text
+          end
+        end
+      end
+      nil
     end
 
     def description
