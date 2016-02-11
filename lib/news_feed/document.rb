@@ -8,7 +8,7 @@ module NewsFeed
     end
 
     def articles
-      dom.css("channel item")
+      dom.css("channel item").map {|node| Article.new(node) }
     end
   end
 end
