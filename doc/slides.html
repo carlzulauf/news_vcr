@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Using VCR</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+template: inverse
+
+# Using VCR
+
+<img src="images/vcr1.jpg" style="width: 50%;">
+
+Ruby HTTP interaction recorder/player
+
+[github.com/vcr/vcr](https://github.com/vcr/vcr)
+
+---
+
+<p class="center">
+  <img src="images/cassette2.png" style="width: 50%;">
+</p>
+
+# Agenda
+
+1. What is VCR?
+2. Why use VCR?
+3. How to use VCR
+4. Building a news reader with help from VCR.
+
+---
+
+# What is VCR?
+
+A ruby gem that records and replays HTTP(S) interactions.
+
+## Record mode
+
+* Monitors HTTP traffic
+* Records all interactions to a YAML "cassette" file
+* Ruby libraries can't tell the difference
+
+## Playback mode
+
+* Intercepts HTTP traffic
+* Plays back data from cassette instead of real traffic
+* Ruby libraries can't tell the difference
+
+---
+
+# Why use VCR?
+
+<p class="center">
+  <img src="images/vcr1.jpg" style="width: 30%;">
+  <img src="images/cassette2.png" style="width: 30%;">
+</p>
+
+Most useful for testing
+
+* Speed up your tests
+* Make your tests deterministic (ie: less brittle)
+* Debug intermittent errors during HTTP interactions
+* Create erroneous interactions to test error handling
+
+Potentially other testing and non-testing uses (fake/stub API results, etc.)
+
+---
+
+# How to use VCR
+
+Normal usage is very simple. Just wrap your code in `use_cassette`.
+
+```ruby
+VCR.use_cassette("google") do
+  Faraday.get("https://www.google.com/")
+end
+```
+
+`google.yml`:
+
+```YAML
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.google.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+# ...
+```
+
+---
+
+class: center, middle
+template: inverse
+
+# Building a News Reader
+
+<img src="images/news.jpg" style="width: 75%;">
+
+With help from VCR
+
+---
+
+# Building a News Reader
+
+## Goals
+
+* Ability to run `ruby read_news.rb` and get top stories in the console
+* Support for [RubyFlow](http://www.rubyflow.com/)
+* Support for [New York Times](http://www.nytimes.com/)
+* ~~Support for Omaha.com~~
+
+---
+
+# Building a News Reader
+
+## Tools
+
+* Ruby
+* VCR
+* Faraday
+* RSS
+* Nokogiri
+
+---
+
+# Building a News Reader
+
+Explore the branches in [this repo](https://github.com/carlzulauf/news_vcr).
+
+Branches were developed in the following order
+
+* pre-vcr
+* fetcher-vcr
+* document-vcr
+* article-vcr
+* rubyflow
+* nytimes
+* master
+
+    </textarea>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
