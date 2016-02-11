@@ -29,7 +29,7 @@ describe NewsFeed::Article do
           "started with Docker. But in our recent experiments we’ve run into "+
           "a couple of issues, so we’ve compiled a list of our encountered "+
           "problems and their solutions on "+
-          "<a href=\"http://cookieshq.co.uk/posts/common-problems-when-starting-with-docker-and-rails/\">our latest post</a>. "+
+          "[our latest post](http://cookieshq.co.uk/posts/common-problems-when-starting-with-docker-and-rails/). "+
           "I hope it’s useful."
         )
       end

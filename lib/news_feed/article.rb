@@ -9,7 +9,17 @@ module NewsFeed
     end
 
     def description
-      node.css("description").text.strip
+      html = node.css("description").text.strip
+
+      doc = Nokogiri::HTML(html)
+
+      # Replace inside of <a> tags with markdown
+      doc.css("a").each do |a|
+        a.inner_html = "[#{a.text}](#{a[:href]})"
+      end
+
+      # Strip all tags
+      doc.content
     end
   end
 end
