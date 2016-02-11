@@ -1,7 +1,8 @@
 module NewsFeed
   class Fetcher
     def fetch(url)
-      Document.new
+      response = get(url)
+      Document.new(response.body) if response.success?
     end
 
     def get(url)

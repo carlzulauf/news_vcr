@@ -8,8 +8,9 @@ describe NewsFeed do
       end
 
       it "should initialize a new fetcher" do
-        expect(NewsFeed::Fetcher).to \
-          receive(:new).and_return(NewsFeed::Fetcher.new)
+        fetcher = NewsFeed::Fetcher.new
+        expect(NewsFeed::Fetcher).to receive(:new).and_return(fetcher)
+        expect(fetcher).to receive(:fetch)
         subject.fetch("http://foo")
       end
 
