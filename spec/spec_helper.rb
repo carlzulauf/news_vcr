@@ -1,5 +1,3 @@
-require 'open-uri'
-
 require 'bundler/setup'
 Bundler.require(:default)
 
