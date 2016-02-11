@@ -9,7 +9,7 @@ module NewsFeed
     end
 
     def description
-      node.css("description").text
+      node.css("description").text.strip
     end
   end
 end
