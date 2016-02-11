@@ -62,6 +62,12 @@ describe NewsFeed::Article do
           "http://www.nytimes.com/2016/02/11/nyregion/new-york-today-where-to-eat-alone.html?partner=rss&emc=rss"
         )
       end
+
+      it "should have the correct description" do
+        expect(subject.description).to eq(
+          "Thursday: Dining solo, Fashion Week begins, and a “cute” Valentine gift."
+        )
+      end
     end
   end
 end

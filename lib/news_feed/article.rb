@@ -17,10 +17,12 @@ module NewsFeed
       nil
     end
 
-    def description
-      html = node.css("description").text.strip
+    def description_html
+      node.css("description").text.strip
+    end
 
-      doc = Nokogiri::HTML(html)
+    def description
+      doc = Nokogiri::HTML(description_html)
 
       # Replace inside of <a> tags with markdown
       doc.css("a").each do |a|
@@ -29,6 +31,12 @@ module NewsFeed
 
       # Strip all tags
       doc.content
+    end
+  end
+
+  class NytimesArticle < Article
+    def description_html
+      super.split("<br clear='all'/>").first
     end
   end
 end
